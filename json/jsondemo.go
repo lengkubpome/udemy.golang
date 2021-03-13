@@ -51,6 +51,7 @@ func main() {
 	v := &dataStruct
 	json.Unmarshal(body, v)
 	// fmt.Println(dataStruct)
+	dataStruct[0].Name = "Kiattiphong Saetang" //เปลี่ยนชื่อตัวเองก่อนแปลงคืน
 
 	// dataStruct --> std.Output
 	result, err := json.MarshalIndent(dataStruct, "", "    ")
