@@ -18,12 +18,13 @@ func main() {
 	// fmt.Printf("Hi I'm %s. %d years old \n", oliver.Name, oliver.Age)
 	const greetPerson = `Hi I'm {{.Name}}. {{.Age}} years old {{"\n"}}`
 
-	people := []Person(filicity, oliver)
+	// greetTemplate, err := template.New("greetingFromPerson").Parse(greetPerson)
+	// if err != nil {
+	// 	return
+	// }
 
-	greetTemplate, err := template.Must(template.New("greetingFromPerson").Parse(greetPerson))
-	if err != nil {
-		return
-	}
+	// ใช้ template.Must ช่วยทำให้โค้ดดูสั้นลง
+	greetTemplate := template.Must(template.New("greetingFromPerson").Parse(greetPerson))
 
 	fmt.Println(greetTemplate.Name())
 	greetTemplate.Execute(os.Stdout, filicity)
