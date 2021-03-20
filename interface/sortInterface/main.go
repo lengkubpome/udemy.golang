@@ -57,8 +57,8 @@ func main() {
 	}
 
 	printPerson(p)
-	// sort.Sort(byName(p))
-	// printPerson(p)
+	sort.Sort(byName(p))
+	printPerson(p)
 
 	// Custom Sort
 	sort.Sort(customSort{Persons: p, less: func(i, j *Person) bool {

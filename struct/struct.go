@@ -2,7 +2,8 @@ package main
 
 import (
 	"fmt"
-	"learning/struct/hr"
+
+	"example.com/hr"
 )
 
 func main() {
