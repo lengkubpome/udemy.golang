@@ -14,6 +14,7 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"runtime/trace"
 	"sync"
 	"time"
 )
@@ -31,6 +32,8 @@ type Image struct {
 	img      []byte
 }
 
+const MAX_DOWNLOAD = 2000
+
 func main() {
 	defer func() {
 		fmt.Println("Main program exit successfully")
@@ -40,17 +43,27 @@ func main() {
 	photos := Photos{}
 	err := getJson("https://jsonplaceholder.typicode.com/photos", &photos)
 	fmt.Println(err)
-	fmt.Println(len(photos))
+	fmt.Println(len(photos[0:MAX_DOWNLOAD]))
 
 	dir := "myDownloadImage" + time.Now().Format("15_04_05")
 	if _, err = os.Stat(dir); err != nil {
 		os.Mkdir(dir, os.ModeDir)
 	}
 
-	chImg := make(chan Image, len(photos))
+	// ตรวจสอบจำนวนของจำนวนการสร้าง trace ของ go rountine
+	f, err := os.Create(dir + ".trace.log")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer f.Close()
+	trace.Start(f)
+	defer trace.Stop()
+	
+
+	chImg := make(chan Image, len(photos[0:MAX_DOWNLOAD]))
 	counter := sync.WaitGroup{}
-	token := make(chan struct{}, 10) // limit download 10 ตัว
-	for _, v := range photos {
+	token := make(chan struct{}, 2000) // limit download
+	for _, v := range photos[0:MAX_DOWNLOAD] {
 		v := v
 		counter.Add(1)
 		go func() {
