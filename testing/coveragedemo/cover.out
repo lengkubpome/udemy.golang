@@ -1,0 +1,7 @@
+mode: set
+udemy.golang/testing/coveragedemo/operation.go:5.47,6.12 1 1
+udemy.golang/testing/coveragedemo/operation.go:16.2,16.19 1 0
+udemy.golang/testing/coveragedemo/operation.go:7.11,8.15 1 1
+udemy.golang/testing/coveragedemo/operation.go:9.11,10.15 1 1
+udemy.golang/testing/coveragedemo/operation.go:11.11,12.15 1 1
+udemy.golang/testing/coveragedemo/operation.go:13.11,14.15 1 1
