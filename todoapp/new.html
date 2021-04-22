@@ -1,0 +1,11 @@
+{{ define "body"}}
+<div>
+    <form action="/todos/create" method="POST">
+        <div class="mb-3">
+            <input type="input" class="form-control" name="item">
+
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+{{ end }}
